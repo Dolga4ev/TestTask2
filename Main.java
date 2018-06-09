@@ -1,63 +1,58 @@
 package test.task2;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
         Scanner scan = new Scanner(System.in);
         String input;
-        Xml file = new Xml();
-        ArrayList tasks = file.read();
-        Operation op = new Operation();
+        Operation operation = new Operation();
 
         System.out.println("?help?");
         do {
-
             input = scan.nextLine();
-            String[] division = input.split("\\s");
 
             if(input.equals("help")){
                 System.out.println("list, new, done, in progress, complete i, add, edit i, remove i, exit");
             }
             if(input.equals("list")){
-                op.view("all");
+                operation.view("all");
             }
             if(input.equals("new")){
-                op.view("new");
+                operation.view("NEW");
             }
             if(input.equals("done")){
-                op.view("done");
+                operation.view("DONE");
             }
             if(input.equals("in progress")){
-                op.view("in progress");
+                operation.view("IN_PROGRESS");
             }
-
-            //if(division[0].equals("complete")){
-            if(division[0].equals("complete")){
+            if(input.contains("complete")){
+                String[] division = input.split("\\s");
                 try {
-                    op.complete(Integer.parseInt(division[1]));
+                    operation.complete(Integer.parseInt(division[1]));
                 }
                 catch (Exception ei) {
                     System.out.println("Вы не ввели номер элемента");
                 }
             }
             if(input.equals("add")){
-                op.add();
+                operation.add();
             }
-            if(division[0].equals("edit")){
+            if(input.contains("edit")){
+                String[] division = input.split("\\s");
                 try {
-                op.edit(Integer.parseInt(division[1]));
+                    operation.edit(Integer.parseInt(division[1]));
                 }
                 catch (Exception ei) {
                     System.out.println("Вы не ввели номер элемента");
                 }
             }
-            if(division[0].equals("remove")){
+            if(input.contains("remove")){
+                String[] division = input.split("\\s");
                 try {
-                op.remove(Integer.parseInt(division[1]));
+                    operation.remove(Integer.parseInt(division[1]));
                 }
                 catch (Exception ei) {
                     System.out.println("Вы не ввели номер элемента");
@@ -67,7 +62,8 @@ public class Main {
                 System.out.println("see you soon");
             }
 
-        } while (!input.equals("exit")); // "exit" останавливает ввод
+        }
+        while (!input.equals("exit"));
 
     }
 }

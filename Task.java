@@ -1,13 +1,44 @@
 package test.task2;
 
+import java.util.Objects;
+
 public class Task {
-    String id;
-    String title;
-    String description;
-    String priority;
-    String deadline;
-    String status;
-    String complete;
+    private String id;
+    private String title;
+    private String description;
+    private String priority;
+    private String deadline;
+    private Status status;
+    private String complete;
+
+    public Task() {
+    }
+    public Task(String id, String title, String description, String priority, String deadline, Status status, String complete) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.deadline = deadline;
+        this.status = status;
+        this.complete = complete;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(id, task.id) &&
+                Objects.equals(title, task.title) &&
+                Objects.equals(description, task.description) &&
+                Objects.equals(priority, task.priority) &&
+                Objects.equals(deadline, task.deadline) &&
+                status == task.status &&
+                Objects.equals(complete, task.complete);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description, priority, deadline, status, complete);
+    }
 
     public String getId() { return id; }
 
@@ -29,7 +60,7 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -53,15 +84,21 @@ public class Task {
         return deadline;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
     public String getComplete() {
         return complete;
     }
-
-
-
-
+    @Override
+    public String toString() {
+        return "Task " + id +
+                " (" + title + "): "
+                + description + ", "
+                + priority + ", "
+                + deadline + ", "
+                + status + ", "
+                + complete ;
+    }
 }
